@@ -13,7 +13,7 @@ screen = pygame.display.set_mode((screen_width,screen_height))
 
 # group setup
 all_sprites = pygame.sprite.Group()
-collision_sprites = pygame.sprite.Group
+collision_sprites = pygame.sprite.Group()
 
 last_time = time.time()
 while True:

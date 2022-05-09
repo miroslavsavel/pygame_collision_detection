@@ -1,31 +1,39 @@
-import pygame, sys, time
+import pygame, sys
 
-#===================
-# classes definition
-#===================
+def bouncing_rect():
+    global x_speed,y_speed
+    moving_rect.x += x_speed
+    moving_rect.y += y_speed
 
+    # collision with screen borders
+    if moving_rect.right >= screen_width or moving_rect.left <=0:
+        x_speed *= -1
+    if moving_rect.bottom >= screen_height or moving_rect.top <=0:
+        y_speed *= -1
+    pygame.draw.rect(screen, (255,255,255), moving_rect)
+    pygame.draw.rect(screen, (255, 0, 0), other_rect)
 
 #Pygame setup
 pygame.init()
-screen_width = 1280
-screen_height = 720
+screen_width = 800
+screen_height = 800
 screen = pygame.display.set_mode((screen_width,screen_height))
+clock = pygame.time.Clock()
 
-# group setup
-all_sprites = pygame.sprite.Group()
-collision_sprites = pygame.sprite.Group
+moving_rect = pygame.Rect(350,350,100,100)
+x_speed, y_speed = 5,4
 
-last_time = time.time()
+other_rect = pygame.Rect(300,600,200,100)
+other_speed = 2
+
 while True:
-    #delta time
-    dt = time.time() - last_time
-    last_time=time.time()
-
-    #event loop
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-
     screen.fill('black')
+
+    bouncing_rect()
+
     pygame.display.update()
+    clock.tick(60)
