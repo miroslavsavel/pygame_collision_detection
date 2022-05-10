@@ -10,8 +10,13 @@ def bouncing_rect():
         x_speed *= -1
     if moving_rect.bottom >= screen_height or moving_rect.top <=0:
         y_speed *= -1
+
+    # collision between rect
+    if moving_rect.colliderect(other_rect):
+        print("collision has occured")
     pygame.draw.rect(screen, (255,255,255), moving_rect)
     pygame.draw.rect(screen, (255, 0, 0), other_rect)
+
 
 #Pygame setup
 pygame.init()
